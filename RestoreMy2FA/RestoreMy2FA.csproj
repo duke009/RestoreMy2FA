@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BBC6CD4F-6456-459C-9B20-D0A40FC7564F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GoogleAuthRestorer</RootNamespace>
-    <AssemblyName>GoogleAuthRestorer</AssemblyName>
+    <RootNamespace>RestoreMy2FA</RootNamespace>
+    <AssemblyName>RestoreMy2FA</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
