@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoreMy2FA", "RestoreMy2FA\RestoreMy2FA.csproj", "{BBC6CD4F-6456-459C-9B20-D0A40FC7564F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleAuthCruncher", "GoogleAuthCruncher\GoogleAuthCruncher.csproj", "{3BFBE9FC-029A-4962-86D1-0B4CCDB92D00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBC6CD4F-6456-459C-9B20-D0A40FC7564F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC6CD4F-6456-459C-9B20-D0A40FC7564F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC6CD4F-6456-459C-9B20-D0A40FC7564F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC6CD4F-6456-459C-9B20-D0A40FC7564F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BFBE9FC-029A-4962-86D1-0B4CCDB92D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BFBE9FC-029A-4962-86D1-0B4CCDB92D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BFBE9FC-029A-4962-86D1-0B4CCDB92D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFBE9FC-029A-4962-86D1-0B4CCDB92D00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54CD3C62-0897-46D1-A1F7-63F453CBE954}
+	EndGlobalSection
+EndGlobal
