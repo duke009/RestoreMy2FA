@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 
@@ -43,7 +44,7 @@ namespace GoogleAuthCruncher
         {
             foreach (DataRow row in dt.Rows)
             {
-                yield return new Account() {Email = (string)row["email"], Issuer = (string)row["issuer"], Secret = (string)row["secret"], OriginalName = (string)row["original_name"] };
+                yield return new Account() {Email = (string)row["email"], Issuer = row["issuer"] != DBNull.Value ? (string)row["issuer"] : null, Secret = (string)row["secret"], OriginalName = (string)row["original_name"] };
             }
         }
     }
