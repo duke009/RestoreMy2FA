@@ -7,41 +7,41 @@ namespace GoogleAuthCruncher
 {
     public class GoogleAuthCruncher
     {
-        public IEnumerable<Bitmap> CrunchTitaniumZip(string fileName)
+        public IEnumerable<BitmapModel> CrunchTitaniumZip(string fileName)
         {
             var dbFilePath = UnArchive(fileName);
-            var otpStrings = CrunchDbFileInternal(dbFilePath);
-            return GetBitmaps(otpStrings);
+            return CrunchDbFileInternal(dbFilePath);
         }
 
-        public IEnumerable<Bitmap> CrunchDbFile(string dbFilePath)
+        public IEnumerable<BitmapModel> CrunchDbFile(string dbFilePath)
         {
-            var otpStrings = CrunchDbFileInternal(dbFilePath);
-            return GetBitmaps(otpStrings);
+            return CrunchDbFileInternal(dbFilePath);
         }
 
-        private IEnumerable<string> CrunchDbFileInternal(string dbFilePath)
+        public IEnumerable<BitmapModel> CrunchDbFileInternal(string dbFilePath)
         {
-            var dbReader = new GoogleAuthDatabaseReader(dbFilePath);
-            return GetStrings(dbReader.selectQuery());
-        }
-
-        private IEnumerable<Bitmap> GetBitmaps(IEnumerable<string> otpStrings)
-        {
-            var qrGenerator = new QRCodeGenerator();
-
-            foreach (var otpString in otpStrings)
+            foreach (var account in GetAccounts(dbFilePath))
             {
-                var qrCodeData = qrGenerator.CreateQrCode(otpString, QRCodeGenerator.ECCLevel.Q);
-                var qrCode = new QRCode(qrCodeData);
-
-                yield return qrCode.GetGraphic(20);
+                yield return new BitmapModel(){OriginalName = account.OriginalName, Bitmap = GetBitmap(account) };
             }
         }
 
-        private IEnumerable<string> GetStrings(IEnumerable<Account> accounts)
+        private IEnumerable<Account> GetAccounts(string dbFilePath)
         {
-            return accounts.Select(Helper.BuildOtpString);
+            var dbReader = new GoogleAuthDatabaseReader(dbFilePath);
+            return dbReader.GetAccounts();
+        }
+
+
+        private Bitmap GetBitmap(Account account)
+        {
+            var otpString = Helper.BuildOtpString(account);
+
+            var qrGenerator = new QRCodeGenerator();
+            var qrCodeData = qrGenerator.CreateQrCode(otpString, QRCodeGenerator.ECCLevel.Q);
+            var qrCode = new QRCode(qrCodeData);
+
+            return qrCode.GetGraphic(20);
         }
 
         private string UnArchive(object filename)

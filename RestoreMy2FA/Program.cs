@@ -1,4 +1,7 @@
-﻿namespace RestoreMy2FA
+﻿using System.IO;
+using System.Linq;
+
+namespace RestoreMy2FA
 {
     class Program
     {
@@ -8,10 +11,10 @@
             var cruncher = new GoogleAuthCruncher.GoogleAuthCruncher();
             var crunched = cruncher.CrunchDbFile("databases");
 
-            var i = 0;
-            foreach (var bitmap in crunched)
+            foreach (var bitmapModel in crunched)
             {
-                bitmap.Save($"{++i}.bmp");
+                var fileName = Path.GetInvalidFileNameChars().Aggregate(bitmapModel.OriginalName, (current, badChar) => current.Replace(badChar.ToString(), "."));
+                bitmapModel.Bitmap.Save($"{fileName}.bmp");
             }
         }
     }

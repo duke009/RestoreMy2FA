@@ -14,7 +14,7 @@ namespace GoogleAuthCruncher
             sqlite = new SQLiteConnection($@"Data Source={path};Version=3;FailIfMissing=True");
         }
 
-        public IEnumerable<Account> selectQuery()
+        public IEnumerable<Account> GetAccounts()
         {
             var dt = new DataTable();
             try

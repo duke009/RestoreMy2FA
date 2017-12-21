@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="BitmapModel.cs" />
     <Compile Include="GoogleAuthCruncher.cs" />
     <Compile Include="GoogleAuthDatabaseReader.cs" />
     <Compile Include="Helper.cs" />
