@@ -26,14 +26,16 @@ namespace GoogleAuthCruncher
                     var ad = new SQLiteDataAdapter(cmd);
                     ad.Fill(dt);
                 }
-
-                sqlite.Dispose();
             }
             catch (SQLiteException ex)
             {
 
             }
-            sqlite.Close();
+            finally
+            {
+                sqlite.Close();
+            }
+
             return GetAccounts(dt); 
         }
 
@@ -41,7 +43,7 @@ namespace GoogleAuthCruncher
         {
             foreach (DataRow row in dt.Rows)
             {
-                yield return new Account() {Email = (string)row["email"], Issuer = (string)row["issuer"], Secret = (string)row["secret"]};
+                yield return new Account() {Email = (string)row["email"], Issuer = (string)row["issuer"], Secret = (string)row["secret"], OriginalName = (string)row["original_name"] };
             }
         }
     }
