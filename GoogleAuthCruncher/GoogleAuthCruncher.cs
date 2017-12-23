@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
+using System.IO;
 using QRCoder;
 
 namespace GoogleAuthCruncher
 {
-    public class GoogleAuthCruncher
+    public class Cruncher
     {
-        public IEnumerable<BitmapModel> CrunchTitaniumZip(string fileName)
+        public IEnumerable<BitmapModel> CrunchTitaniumZip(string filePath)
         {
-            var dbFilePath = UnArchive(fileName);
-            return CrunchDbFileInternal(dbFilePath);
+            using (var unarchiver = new Unarchivator())
+            {
+                var dbFilePath = GetDbFilePath(unarchiver.Unarchive(filePath));
+                return CrunchDbFileInternal(dbFilePath);
+            }
         }
 
         public IEnumerable<BitmapModel> CrunchDbFile(string dbFilePath)
@@ -18,7 +21,12 @@ namespace GoogleAuthCruncher
             return CrunchDbFileInternal(dbFilePath);
         }
 
-        public IEnumerable<BitmapModel> CrunchDbFileInternal(string dbFilePath)
+        private string GetDbFilePath(string tempdir)
+        {
+            return Path.Combine(tempdir, "");
+        }
+
+        private IEnumerable<BitmapModel> CrunchDbFileInternal(string dbFilePath)
         {
             foreach (var account in GetAccounts(dbFilePath))
             {
@@ -32,7 +40,6 @@ namespace GoogleAuthCruncher
             return dbReader.GetAccounts();
         }
 
-
         private Bitmap GetBitmap(Account account)
         {
             var otpString = Helper.BuildOtpString(account);
@@ -42,11 +49,6 @@ namespace GoogleAuthCruncher
             var qrCode = new QRCode(qrCodeData);
 
             return qrCode.GetGraphic(20);
-        }
-
-        private string UnArchive(object filename)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
