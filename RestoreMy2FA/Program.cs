@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using GoogleAuthCruncher;
 using RestoreMy2FA.Resources;
 
@@ -9,7 +10,7 @@ namespace RestoreMy2FA
 {
     internal class Program
     {
-        public static string ArchiveFileName = "com.google.android.apps.authenticator2.tar.gz";
+        public static string ArchiveFileType = "*.tar.gz";
         public static string DbFileName = "databases";
 
         static void Main(string[] args)
@@ -18,9 +19,11 @@ namespace RestoreMy2FA
             {
                 var cruncher = new Cruncher();
 
-                if (File.Exists(ArchiveFileName))
+                var files = Directory.GetFiles(Directory.GetCurrentDirectory(), ArchiveFileType);
+
+                if (files.Any())
                 {
-                    SaveCrunched(cruncher.CrunchTitaniumZip(ArchiveFileName));
+                    SaveCrunched(cruncher.CrunchTitaniumZip(files.First()));
                 }
                 else if (File.Exists(DbFileName))
                 {
@@ -83,7 +86,7 @@ namespace RestoreMy2FA
                 switch (key.KeyChar)
                 {
                     case '1':
-                        ChosePath(filePath => SaveCrunched(cruncher.CrunchTitaniumZip(filePath)), ArchiveFileName);
+                        ChosePath(filePath => SaveCrunched(cruncher.CrunchTitaniumZip(filePath)), "com.google.android.apps.authenticator2.tar.gz");
                         return;
                     case '2':
                         ChosePath(filePath => SaveCrunched(cruncher.CrunchDbFile(filePath)), DbFileName);
