@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DatabaseFile" xml:space="preserve">
+    <value>2. Файл БД (файл 'databases')</value>
+  </data>
+  <data name="DbFileUnrecognized" xml:space="preserve">
+    <value>Ты втираешь мне какую то дичь: Файл БД</value>
+  </data>
+  <data name="DidYouCopyFileToTheProgramDirectory" xml:space="preserve">
+    <value>Вы скопировали файл в папку с программой?</value>
+  </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>Файл не существует. Путь: {0}</value>
   </data>
@@ -126,11 +135,20 @@
   <data name="NKeysExported" xml:space="preserve">
     <value>{0} ключей экспортировано</value>
   </data>
+  <data name="PleaseInputFilePath" xml:space="preserve">
+    <value>Пожалуйста введите путь к файлу:</value>
+  </data>
   <data name="PressAnyKey" xml:space="preserve">
     <value>Нажмите любую клавишу...</value>
   </data>
+  <data name="TitaniumBackupArchive" xml:space="preserve">
+    <value>1. Архив Titanium Backup (com.google.android.apps.authenticator2.tar.gz)</value>
+  </data>
   <data name="UnexpectedArgument" xml:space="preserve">
     <value>Неизвестный Аргумент {0}. Ожидается archive или db</value>
+  </data>
+  <data name="WhatDoYouHave" xml:space="preserve">
+    <value>Что у вас есть? (нажмите 1 или 2)</value>
   </data>
   <data name="WrongCountOfArguments" xml:space="preserve">
     <value>Неверное колличество аргументов. Ожидается два или ноль.</value>

@@ -7,56 +7,61 @@ using RestoreMy2FA.Resources;
 
 namespace RestoreMy2FA
 {
-    class Program
+    internal class Program
     {
+        public static string ArchiveFileName = "com.google.android.apps.authenticator2.zip";
+        public static string DbFileName = "databases";
+
         static void Main(string[] args)
         {
-            var cruncher = new Cruncher();
-
-            if (!args.Any())
+            try
             {
-                ProcessCommandLine(cruncher);
-                Console.WriteLine(Strings.PressAnyKey);
-                Console.ReadKey();
-                return;
+                var cruncher = new Cruncher();
+
+                if (File.Exists(ArchiveFileName))
+                {
+                    SaveCrunched(cruncher.CrunchTitaniumZip(ArchiveFileName));
+                }
+                else if (File.Exists(DbFileName))
+                {
+                    SaveCrunched(cruncher.CrunchDbFile(DbFileName));
+                }
+                else if (!args.Any())
+                {
+                    ProcessCommandLine(cruncher);
+                }
+                else if (args.Length != 1)
+                {
+                    SaveCrunched(cruncher.CrunchTitaniumZip(args[0]));
+                }
+                else if (args.Length != 2)
+                {
+                    Console.WriteLine(Strings.WrongCountOfArguments);
+                    Console.WriteLine(Strings.Help);
+                }
+                else if (!File.Exists(args[1]))
+                {
+                    Console.WriteLine(Strings.FileDoesNotExist, args[1]);
+                }
+                else
+                {
+                    switch (args[0])
+                    {
+                        case "archive":
+                            SaveCrunched(cruncher.CrunchTitaniumZip(args[1]));
+                            break;
+                        case "db":
+                            SaveCrunched(cruncher.CrunchDbFile(args[1]));
+                            break;
+                        default:
+                            Console.WriteLine(Strings.UnexpectedArgument);
+                            break;
+                    }
+                }
             }
-
-            if (args.Length != 1)
+            catch (GoogleAuthDatabaseException e)
             {
-                SaveCrunched(cruncher.CrunchTitaniumZip(args[0]));
-                Console.WriteLine(Strings.PressAnyKey);
-                Console.ReadKey();
-                return;
-            }
-
-            if (args.Length != 2)
-            {
-                Console.WriteLine(Strings.WrongCountOfArguments);
-                Console.WriteLine(Strings.Help);
-                Console.WriteLine(Strings.PressAnyKey);
-                Console.ReadKey();
-                return;
-            }
-
-            if (!File.Exists(args[1]))
-            {
-                Console.WriteLine(Strings.FileDoesNotExist, args[1]);
-                Console.WriteLine(Strings.PressAnyKey);
-                Console.ReadKey();
-                return;
-            }
-
-            switch (args[0])
-            {
-                case "archive":
-                    SaveCrunched(cruncher.CrunchTitaniumZip(args[1]));
-                    break;
-                case "db":
-                    SaveCrunched(cruncher.CrunchDbFile(args[1]));
-                    break;
-                default:
-                    Console.WriteLine(Strings.UnexpectedArgument);
-                    break;
+                Console.WriteLine(Strings.DbFileUnrecognized);
             }
 
             Console.WriteLine(Strings.PressAnyKey);
@@ -78,10 +83,10 @@ namespace RestoreMy2FA
                 switch (key.KeyChar)
                 {
                     case '1':
-                        ChosePath(filePath => SaveCrunched(cruncher.CrunchTitaniumZip(filePath)), "com.google.authenticator.tar.gz");
+                        ChosePath(filePath => SaveCrunched(cruncher.CrunchTitaniumZip(filePath)), ArchiveFileName);
                         return;
                     case '2':
-                        ChosePath(filePath => SaveCrunched(cruncher.CrunchDbFile(filePath)), "accounts");
+                        ChosePath(filePath => SaveCrunched(cruncher.CrunchDbFile(filePath)), DbFileName);
                         return;
                 }
             }
@@ -125,7 +130,6 @@ namespace RestoreMy2FA
                 }
             }
         }
-
 
         private static void SaveCrunched(IEnumerable<BitmapModel> crunched)
         {

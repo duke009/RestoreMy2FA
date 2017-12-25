@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DatabaseFile" xml:space="preserve">
-    <value>2. Database file ('accounts' file)</value>
+    <value>2. Database file ('databases' file)</value>
+  </data>
+  <data name="DbFileUnrecognized" xml:space="preserve">
+    <value>Db File cannot be recognized</value>
   </data>
   <data name="DidYouCopyFileToTheProgramDirectory" xml:space="preserve">
     <value>Did you copy file to the program directory? (y/n)</value>
@@ -130,7 +133,7 @@
     <value>Arguments: [archive | db  path_to_file]</value>
   </data>
   <data name="NKeysExported" xml:space="preserve">
-    <value>{0} keys ecported</value>
+    <value>{0} keys exported</value>
   </data>
   <data name="PleaseInputFilePath" xml:space="preserve">
     <value>Please input file path:</value>
@@ -139,7 +142,7 @@
     <value>Press any key to continue...</value>
   </data>
   <data name="TitaniumBackupArchive" xml:space="preserve">
-    <value>1. Titanium Backup Archive (com.google.authenticator.tar.gz)</value>
+    <value>1. Titanium Backup Archive (com.google.android.apps.authenticator2.tar.gz)</value>
   </data>
   <data name="UnexpectedArgument" xml:space="preserve">
     <value>Unexpected Argument {0}. Expected: archive or db</value>

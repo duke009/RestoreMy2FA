@@ -30,7 +30,7 @@ namespace GoogleAuthCruncher
             }
             catch (SQLiteException ex)
             {
-
+                throw new GoogleAuthDatabaseException();
             }
             finally
             {

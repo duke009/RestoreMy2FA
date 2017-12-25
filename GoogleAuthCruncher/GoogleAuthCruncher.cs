@@ -1,29 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using QRCoder;
 
 namespace GoogleAuthCruncher
 {
     public class Cruncher
     {
-        public IEnumerable<BitmapModel> CrunchTitaniumZip(string filePath)
+        // TODO To config!
+        private const string DbPathInArchive = "data\\data\\com.google.android.apps.authenticator2\\databases\\databases";
+        public List<BitmapModel> CrunchTitaniumZip(string filePath)
         {
             using (var unarchiver = new Unarchivator())
             {
-                var dbFilePath = GetDbFilePath(unarchiver.Unarchive(filePath));
-                return CrunchDbFileInternal(dbFilePath);
+                var dbFilePath = Path.Combine(unarchiver.Unarchive(filePath), DbPathInArchive);
+                return CrunchDbFileInternal(dbFilePath).ToList();
             }
         }
 
         public IEnumerable<BitmapModel> CrunchDbFile(string dbFilePath)
         {
             return CrunchDbFileInternal(dbFilePath);
-        }
-
-        private string GetDbFilePath(string tempdir)
-        {
-            return Path.Combine(tempdir, "");
         }
 
         private IEnumerable<BitmapModel> CrunchDbFileInternal(string dbFilePath)

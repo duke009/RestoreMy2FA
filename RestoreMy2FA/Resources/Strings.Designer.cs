@@ -19,7 +19,7 @@ namespace RestoreMy2FA.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
@@ -61,11 +61,20 @@ namespace RestoreMy2FA.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2. Database file (&apos;accounts&apos; file).
+        ///   Looks up a localized string similar to 2. Database file (&apos;databases&apos; file).
         /// </summary>
         internal static string DatabaseFile {
             get {
                 return ResourceManager.GetString("DatabaseFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Db File cannot be recognized.
+        /// </summary>
+        internal static string DbFileUnrecognized {
+            get {
+                return ResourceManager.GetString("DbFileUnrecognized", resourceCulture);
             }
         }
         
@@ -97,7 +106,7 @@ namespace RestoreMy2FA.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} keys ecported.
+        ///   Looks up a localized string similar to {0} keys exported.
         /// </summary>
         internal static string NKeysExported {
             get {
@@ -124,7 +133,7 @@ namespace RestoreMy2FA.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1. Titanium Backup Archive (com.google.authenticator.tar.gz).
+        ///   Looks up a localized string similar to 1. Titanium Backup Archive (com.google.android.apps.authenticator2.tar.gz).
         /// </summary>
         internal static string TitaniumBackupArchive {
             get {

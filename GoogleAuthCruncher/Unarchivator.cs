@@ -23,7 +23,7 @@ namespace GoogleAuthCruncher
         public void Dispose()
         {
             // TODO Wipe files data to prevent restoration
-            WipeData(tempDir);
+            //WipeData(tempDir);
             Directory.Delete(tempDir, true);
         }
 
