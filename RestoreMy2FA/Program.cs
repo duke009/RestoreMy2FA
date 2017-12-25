@@ -9,7 +9,7 @@ namespace RestoreMy2FA
 {
     internal class Program
     {
-        public static string ArchiveFileName = "com.google.android.apps.authenticator2.zip";
+        public static string ArchiveFileName = "com.google.android.apps.authenticator2.tar.gz";
         public static string DbFileName = "databases";
 
         static void Main(string[] args)

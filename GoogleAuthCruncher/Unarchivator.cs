@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
 using System.Security.Cryptography;
+using ICSharpCode.SharpZipLib.GZip;
+using ICSharpCode.SharpZipLib.Tar;
 
 namespace GoogleAuthCruncher
 {
@@ -16,8 +17,21 @@ namespace GoogleAuthCruncher
 
         public string Unarchive(string filePath)
         {
-            ZipFile.ExtractToDirectory(filePath, tempDir);
+            ExtractTgz(filePath, tempDir);
             return tempDir;
+        }
+
+        public void ExtractTgz(string gzArchiveName, string destFolder)
+        {
+            var inStream = File.OpenRead(gzArchiveName);
+            var gzipStream = new GZipInputStream(inStream);
+
+            var tarArchive = TarArchive.CreateInputTarArchive(gzipStream);
+            tarArchive.ExtractContents(destFolder);
+            tarArchive.Close();
+
+            gzipStream.Close();
+            inStream.Close();
         }
 
         public void Dispose()
