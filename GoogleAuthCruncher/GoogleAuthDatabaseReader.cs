@@ -30,7 +30,7 @@ namespace GoogleAuthCruncher
             }
             catch (SQLiteException ex)
             {
-                throw new GoogleAuthDatabaseException();
+                throw new GoogleAuthDatabaseException("Cannot Get accounts", ex);
             }
             finally
             {

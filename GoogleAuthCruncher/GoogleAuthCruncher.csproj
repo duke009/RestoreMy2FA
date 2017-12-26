@@ -61,7 +61,7 @@
     <Compile Include="GoogleAuthDatabaseReader.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unarchivator.cs" />
+    <Compile Include="Unarchiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ArchiveFileCannotBeProcessed" xml:space="preserve">
+    <value>Archive file cannot be processed</value>
+  </data>
   <data name="DatabaseFile" xml:space="preserve">
     <value>2. Database file ('databases' file)</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="UnexpectedArgument" xml:space="preserve">
     <value>Unexpected Argument {0}. Expected: archive or db</value>
+  </data>
+  <data name="UnexpectedBehaviour" xml:space="preserve">
+    <value>Unexpected behaviour</value>
   </data>
   <data name="WhatDoYouHave" xml:space="preserve">
     <value>What do You have? (press 1 or 2)</value>

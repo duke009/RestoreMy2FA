@@ -10,9 +10,10 @@ namespace GoogleAuthCruncher
     {
         // TODO To config!
         private const string DbPathInArchive = "data\\data\\com.google.android.apps.authenticator2\\databases\\databases";
-        public List<BitmapModel> CrunchTitaniumZip(string filePath)
+
+        public List<BitmapModel> CrunchTitaniumArchive(string filePath)
         {
-            using (var unarchiver = new Unarchivator())
+            using (var unarchiver = new Unarchiver())
             {
                 var dbFilePath = Path.Combine(unarchiver.Unarchive(filePath), DbPathInArchive);
                 return CrunchDbFileInternal(dbFilePath).ToList();

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
 using GoogleAuthCruncher;
 using RestoreMy2FA.Resources;
 
@@ -10,8 +9,11 @@ namespace RestoreMy2FA
 {
     internal class Program
     {
-        public static string ArchiveFileType = "*.tar.gz";
-        public static string DbFileName = "databases";
+        public const string ArchiveFileType = "*.tar.gz";
+        public const string DbFileName = "databases";
+        public const string ExportDirectoryName = "Export";
+
+        private static void AddToLog(Exception e) => File.AppendAllLines("Log.txt", new [] {$"[{DateTime.Now}] : {e.Message}. Stack Trace: {e.StackTrace}" } );
 
         static void Main(string[] args)
         {
@@ -23,7 +25,7 @@ namespace RestoreMy2FA
 
                 if (files.Any())
                 {
-                    SaveCrunched(cruncher.CrunchTitaniumZip(files.First()));
+                    SaveCrunched(cruncher.CrunchTitaniumArchive(files.First()));
                 }
                 else if (File.Exists(DbFileName))
                 {
@@ -35,7 +37,7 @@ namespace RestoreMy2FA
                 }
                 else if (args.Length != 1)
                 {
-                    SaveCrunched(cruncher.CrunchTitaniumZip(args[0]));
+                    SaveCrunched(cruncher.CrunchTitaniumArchive(args[0]));
                 }
                 else if (args.Length != 2)
                 {
@@ -51,7 +53,7 @@ namespace RestoreMy2FA
                     switch (args[0])
                     {
                         case "archive":
-                            SaveCrunched(cruncher.CrunchTitaniumZip(args[1]));
+                            SaveCrunched(cruncher.CrunchTitaniumArchive(args[1]));
                             break;
                         case "db":
                             SaveCrunched(cruncher.CrunchDbFile(args[1]));
@@ -64,13 +66,25 @@ namespace RestoreMy2FA
             }
             catch (GoogleAuthDatabaseException e)
             {
+                AddToLog(e.InnerException);
                 Console.WriteLine(Strings.DbFileUnrecognized);
+            }
+            catch (GoogleAuthUnarchiverException e)
+            {
+                AddToLog(e.InnerException);
+                Console.WriteLine(Strings.ArchiveFileCannotBeProcessed);
+            }
+            catch (Exception e)
+            {
+                AddToLog(e);
+                Console.WriteLine(Strings.UnexpectedBehaviour);
             }
 
             Console.WriteLine(Strings.PressAnyKey);
             Console.ReadKey();
+            // TODO may be Wipe QR after approval
+            //DirectoryHelper.WipeAndDelete(ExportDirectoryName);
         }
-
 
         private static void ProcessCommandLine(Cruncher cruncher)
         {
@@ -86,7 +100,7 @@ namespace RestoreMy2FA
                 switch (key.KeyChar)
                 {
                     case '1':
-                        ChosePath(filePath => SaveCrunched(cruncher.CrunchTitaniumZip(filePath)), "com.google.android.apps.authenticator2.tar.gz");
+                        ChosePath(filePath => SaveCrunched(cruncher.CrunchTitaniumArchive(filePath)), "com.google.android.apps.authenticator2.tar.gz");
                         return;
                     case '2':
                         ChosePath(filePath => SaveCrunched(cruncher.CrunchDbFile(filePath)), DbFileName);
@@ -127,8 +141,7 @@ namespace RestoreMy2FA
                             return;
                         }
 
-                        setPath(defaultPath);
-
+                        setPath(path);
                         break;
                 }
             }
@@ -137,7 +150,7 @@ namespace RestoreMy2FA
         private static void SaveCrunched(IEnumerable<BitmapModel> crunched)
         {
             // otpauth://totp/Google%3Amyemail%40gmail.com?secret=7gmdmzctmhpm7i6nrmbom6u5gny7o6la&issuer=Google
-            var di = Directory.CreateDirectory("Export");
+            var di = Directory.CreateDirectory(ExportDirectoryName);
             foreach (var bitmapModel in crunched)
             {
                 var fileName = Path.GetInvalidFileNameChars().Aggregate(bitmapModel.OriginalName, (current, badChar) => current.Replace(badChar.ToString(), "."));

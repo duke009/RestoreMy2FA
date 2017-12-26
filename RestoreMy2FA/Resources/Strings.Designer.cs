@@ -19,7 +19,7 @@ namespace RestoreMy2FA.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
@@ -57,6 +57,15 @@ namespace RestoreMy2FA.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive file cannot be processed.
+        /// </summary>
+        internal static string ArchiveFileCannotBeProcessed {
+            get {
+                return ResourceManager.GetString("ArchiveFileCannotBeProcessed", resourceCulture);
             }
         }
         
@@ -147,6 +156,15 @@ namespace RestoreMy2FA.Resources {
         internal static string UnexpectedArgument {
             get {
                 return ResourceManager.GetString("UnexpectedArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected behaviour.
+        /// </summary>
+        internal static string UnexpectedBehaviour {
+            get {
+                return ResourceManager.GetString("UnexpectedBehaviour", resourceCulture);
             }
         }
         
