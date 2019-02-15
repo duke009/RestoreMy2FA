@@ -13,7 +13,7 @@
 ===================================================================   
 Application for QR code generation from Google Authenticator backup
 
-Suitable only for those who have rooted an old phone with Titanium Backup, and a new one cannot be rooted
+Suitable only for those who have an rooted old phone with Titanium Backup, and a new one cannot be rooted
 
 The application retrieves the keys from the Google Authenticator database, generates QR codes by these keys, and saves them as poctures with QR codes. 
 ## How to use: 
